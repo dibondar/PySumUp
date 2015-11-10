@@ -69,7 +69,7 @@ class PySumUp:
             partition.append(
                 expr.subs(self.var, self.x0).simplify()
             )
-            expr = expr.diff(self.var, 1).simplify()
+            expr = expr.diff(self.var, 1)
         #
         return partition
 
@@ -337,11 +337,8 @@ if __name__ == '__main__':
     x, s = sympy.symbols('x s')
 
     S = sympy.exp(sympy.sqrt(x + 2))
+
     n = 10
-    """
-    test1 = PySumUp(series_to_sum=S.series(x, 0, n), var=x, x0=0, order=n)\
-                .use_unary_func(sympy.exp, sympy.sqrt).run().print_hof()
-    """
     test2 = PySumUp(series_to_sum=S.series(x, 0, n), var=x, x0=0, order=n)\
             .use_consts(1, 2).use_unary_func(sympy.sqrt, sympy.exp)\
             .run().print_hof()
